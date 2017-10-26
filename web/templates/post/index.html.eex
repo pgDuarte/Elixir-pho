@@ -1,8 +1,9 @@
-<h2>Listing posts</h2>
+<h2>Listing Freds</h2>
 
 <table class="table">
   <thead>
     <tr>
+      <th>UserId</th>
       <th>Title</th>
       <th>Comments</th>
 
@@ -12,6 +13,7 @@
   <tbody>
 <%= for {post, count} <- @posts do %>
     <tr>
+      <td><%= post.userId %></td>
       <td><%= post.title %></td>
       <td><%= count %></td>
 
@@ -25,4 +27,24 @@
   </tbody>
 </table>
 
-<%= link "New post", to: post_path(@conn, :new) %>
+
+
+
+
+
+<div class="col-lg-7">
+  <ul>
+
+      <%= link "New post", to: post_path(@conn, :new) %>
+
+  </ul>
+</div>
+
+<div class="col-lg-5">
+  <ul>
+
+      <a href="http://localhost:4000/">Home</a>
+
+  </ul>
+</div>
+</div>

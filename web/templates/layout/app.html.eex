@@ -14,10 +14,12 @@
   <body>
 
     <%= if @current_user do %>
-    <div class="jumbotron">
-      <h2>Welcome, <%= @current_user.name %>!</h2>
-      <img src="<%= @current_user.avatar %>" class="img-circle"/>
-      <%= link "Logout", to: auth_path(@conn, :delete), method: :delete, class: "btn btn-danger" %>
+    <div class="container">
+      <div class="col-lg-6">
+        <h4>Welcome, <%= @current_user.name %>!</h4>
+        <img src="<%= @current_user.avatar %>" class="img-circle" width="40" height="40"/>
+        <%= link "Logout", to: auth_path(@conn, :delete), method: :delete, class: "btn btn-danger" %>
+      </div>
     </div>
     <% else %>
     <div class="container">
