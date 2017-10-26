@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>Hello FredIt!</title>
+    <link rel="stylesheet" href="<%= static_path(@conn, "/css/app.css") %>">
+  </head>
+
+  <body>
+
+    <%= if @current_user do %>
+    <div class="jumbotron">
+      <h2>Welcome, <%= @current_user.name %>!</h2>
+      <img src="<%= @current_user.avatar %>" class="img-circle"/>
+      <%= link "Logout", to: auth_path(@conn, :delete), method: :delete, class: "btn btn-danger" %>
+    </div>
+    <% else %>
+    <div class="container">
+      <header class="header">
+        <nav role="navigation">
+          <ul class="nav nav-pills pull-right">
+            <li><a href="<%= auth_path @conn, :index, "github" %>">Login</a></li>
+          </ul>
+        </nav>
+        <span class="logo"></span>
+      </header>
+      </div>
+        <% end %>
+
+      <div class="container">
+
+      <p class="alert alert-info" role="alert"><%= get_flash(@conn, :info) %></p>
+      <p class="alert alert-danger" role="alert"><%= get_flash(@conn, :error) %></p>
+
+      <div class="jumbotron">
+        <h2><%= gettext "Welcome to %{name}", name: "FredIt!" %></h2>
+        <p class="lead"> On this platform users can share & view Freds <br /> posted for discussion and remove/edit the Freds they created.</p>
+      </div>
+
+      <%= if @current_user do %>
+        <main role="main">
+          <%= render @view_module, @view_template, assigns %>
+        </main>
+      <% end %>
+
+    </div> <!-- /container -->
+    <script src="<%= static_path(@conn, "/js/app.js") %>"></script>
+  </body>
+</html>
