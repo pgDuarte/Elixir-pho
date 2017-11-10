@@ -1,6 +1,8 @@
 defmodule FredIt.Comment do
   use FredIt.Web, :model
 
+  require IEx
+
   schema "comments" do
     field :name, :string
     field :content, :string
@@ -14,23 +16,18 @@ defmodule FredIt.Comment do
 
 
 
-    @doc """
+  @doc """
   Creates a changeset based on the `model` and `params`.
   If `params` are nil, an invalid changeset is returned
   with no validation performed.
   """
   def changeset(model, params \\ :empty) do
+    IEx.pry
+
     model
     |> cast(params, @required_fields, @optional_fields)
-    |> validate_length(:content, max: 100)
+    |> validate_length(:content, max: 140)
   end
 
-@doc """
-  def changeset(struct, params \\ %{}) do
-    struct
-    |> cast(params, [:name, :content])
-    |> validate_required([:name, :content])
-  end
-  """
 
 end
