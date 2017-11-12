@@ -4,6 +4,8 @@ defmodule FredIt.PostController do
   alias FredIt.Post
   alias FredIt.Comment
 
+  require IEx
+
   require Logger
 
   plug :scrub_params, "comment" when action in [:add_comment]
@@ -48,6 +50,7 @@ defmodule FredIt.PostController do
 
   def show(conn, %{"id" => postid}) do
     IO.puts "show"
+    add_like(conn, postid)
     post = Repo.get(Post, postid) |> Repo.preload([:comments])
     changeset = Comment.changeset(%Comment{}, %{id: postid})
     render(conn, "show.html", post: post, changeset: changeset)
@@ -106,5 +109,14 @@ defmodule FredIt.PostController do
       |> render("show.html", post: post, changeset: changeset)
     end
   end
+
+  def add_like(conn, postid) do
+    post = Repo.get!(Post, postid)
+    IEx.pry
+    #get number of likes
+    #increase likes
+    #
+  end
+
 
 end
